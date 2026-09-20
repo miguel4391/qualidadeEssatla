@@ -1,0 +1,607 @@
+<%- include('partials/header') %>
+
+<script src="/vendor/pdf/jspdf.umd.min.js"></script>
+<script src="/vendor/pdf/jspdf.plugin.autotable.min.js"></script>
+<meta charset="UTF-8">
+
+<style>
+    span{
+        max-width: 280px;
+    }
+</style>
+
+<%
+    
+    let grau = fuc[0].doc1Grau;
+    console.log("Before:", grau);
+    const docente = lstDoc.find(doc => doc.nomeDoc === fuc[0].doc1Nome);
+
+    if (docente && docente.especialDoc === 1) {
+
+        console.log("Inside IF");
+        console.log("Comparison:", docente.grauDoc == 5);
+        grau = (docente.grauDoc == 5)
+            ? "Doutoramento - Especialista"
+            : "Especialista";
+
+        console.log("After assignment:", grau);
+    }
+    console.log("Final:", grau);
+
+
+    let grau2 = fuc[0].doc2Grau;
+
+    const docente2 = lstDoc.find(doc => doc.nomeDoc === fuc[0].doc2Nome);
+
+    if (docente2 && docente2.especialDoc === 1) {
+        grau2 = (docente2.grauDoc == 5)
+            ? "Doutoramento - Especialista"
+            : "Especialista";
+    }
+    let grau3 = fuc[0].doc3Grau;
+
+    const docente3 = lstDoc.find(doc => doc.nomeDoc === fuc[0].doc3Nome);
+
+    if (docente3 && docente3.especialDoc === 1) {
+        grau3 = (docente3.grauDoc == 5)
+            ? "Doutoramento - Especialista"
+            : "Especialista";
+    }
+
+    let grau4 = fuc[0].doc4Grau;
+
+    const docente4 = lstDoc.find(doc => doc.nomeDoc === fuc[0].doc4Nome);
+
+    if (docente4 && docente4.especialDoc === 1) {
+        grau4 = (docente4.grauDoc == 5)
+            ? "Doutoramento - Especialista"
+            : "Especialista";
+    }
+
+    let grau5 = fuc[0].doc5Grau;
+
+    const docente5 = lstDoc.find(doc => doc.nomeDoc === fuc[0].doc5Nome);
+
+    if (docente5 && docente5.especialDoc === 1) {
+        grau5 = (docente5.grauDoc == 5)
+            ? "Doutoramento - Especialista"
+            : "Especialista";
+    }
+
+    let grau6 = fuc[0].doc6Grau;
+
+    const docente6 = lstDoc.find(doc => doc.nomeDoc === fuc[0].doc6Nome);
+
+    if (docente6 && docente6.especialDoc === 1) {
+        grau6 = (docente6.grauDoc == 5)
+            ? "Doutoramento - Especialista"
+            : "Especialista";
+    }
+
+    let grau7 = fuc[0].doc7Grau;
+
+    const docente7 = lstDoc.find(doc => doc.nomeDoc === fuc[0].doc7Nome);
+
+    if (docente7 && docente7.especialDoc === 1) {
+        grau7 = (docente7.grauDoc == 5)
+            ? "Doutoramento - Especialista"
+            : "Especialista";
+    }
+
+    let grau8 = fuc[0].doc8Grau;
+
+    const docente8 = lstDoc.find(doc => doc.nomeDoc === fuc[0].doc8Nome);
+
+    if (docente8 && docente8.especialDoc === 1) {
+        grau8 = (docente8.grauDoc == 5)
+            ? "Doutoramento - Especialista"
+            : "Especialista";
+    }
+
+    let grau9 = fuc[0].doc9Grau;
+
+    const docente9 = lstDoc.find(doc => doc.nomeDoc === fuc[0].doc9Nome);
+
+    if (docente9 && docente9.especialDoc === 1) {
+        grau9 = (docente9.grauDoc == 5)
+            ? "Doutoramento - Especialista"
+            : "Especialista";
+    }
+
+    let grau10 = fuc[0].doc10Grau;
+
+    const docente10 = lstDoc.find(doc => doc.nomeDoc === fuc[0].doc10Nome);
+
+    if (docente10 && docente10.especialDoc === 1) {
+        grau10 = (docente10.grauDoc == 5)
+            ? "Doutoramento - Especialista"
+            : "Especialista";
+    }
+%>
+<%= console.log("EJS grau =", grau) %>
+<script type="text/javascript">
+
+    function sanitize(str) {
+        return String(encodingText(str))
+            .replace(/&amp;/g, "&")
+            .replace(/&lt;/g, "<")
+            .replace(/&gt;/g, ">")
+            .replace(/&quot;/g, '"')
+            .replace(/&#39;/g, "'")
+            .replace(/[\x00-\x1F\x7F-\x9F]/g, "")  // remove caracteres de controlo invisíveis
+            .replace(/\s+/g, " ")                  // colapsa espaços múltiplos
+            .replace(/\t/g, "")
+            .replace("à", "à")
+            .replace("é", "é")
+            .replace("á", "á")
+            .replace("ç", "ç")
+            .replace("ã", "ã")
+            .replace("ção", "ção")
+            .replace("ó", "ó")
+            .replace("í", "í")
+            .replace("ú", "ú")
+            .replace("á́", "á")
+            .replace("\“", "\"")
+            .replace("\”", "\"")
+            .replace("á́", "á")
+            .replace("â", "â")
+            .replace("ê", "ê")
+            .replace("‑", "-")
+            .replace("á", "á")
+            .replace("à", "à")
+            .replace("â", "â")
+            .replace("−", "-")
+            .replace("‑", "-")
+            .replace("\"", "\"")
+            .replace("&amp;", "&")
+            .replace("&amp;", "&" )
+            .replace(" &#34;", "\"")
+            //.replace(/[^\p{L}\d]+/u, ' ')
+            .trim();
+    }
+    function encodingText(str){
+        const encoder = new TextEncoder();
+        const utf8Array = encoder.encode(str);
+        const decoder = new TextDecoder("utf-8");
+        const decodedString = decoder.decode(utf8Array);
+        return decodedString;
+    }
+
+    const addFooters = doc => {
+        const pageCount = doc.internal.getNumberOfPages()
+                
+        doc.setFont('Helvetica', 'italic')
+        doc.setFontSize(8)
+        
+        for (var i = 1; i <= pageCount; i++) {
+            const fuc = doc.splitTextToSize(sanitize('<%= fuc[0].nomeUCPt %>'),70, {} )
+            doc.text(fuc ,14, 287,{align:'left'})
+            doc.setPage(i)
+            doc.text('Página ' + String(i) + ' de ' + String(pageCount), doc.internal.pageSize.width / 2, 287, {
+            align: 'center'
+            })
+            const curso = doc.splitTextToSize(sanitize('<%= curso %>'),70, {} )
+            doc.text(curso,doc.internal.pageSize.width -14, 287,{align:'right'})
+            
+        }
+        
+    }
+    $(function(){
+        generatePDF();
+    });
+    function generatePDF() {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+        const headColor = [248, 187, 0]
+        var img = new Image()
+        img.src = '/img/logo.png'
+        doc.addImage(img, 'png', 13, 10, 65, 15)
+        
+        doc.setFont("Helvetica", "normal");
+
+        var header1 = ['Designação da Unidade Curricular'];
+        var data1   = [["PT: <%= fuc[0].nomeUCPt %>\nEN: <%= fuc[0].noemUCEn %>"]];
+        var config1 = {
+            tableWidth: 200,
+            margin: {right:14,left:14, top:40},
+            tableWidth: 'auto',
+            printHeaders : true,
+            headStyles :{fillColor : headColor}
+        }
+        
+        doc.autoTable(header1,data1,config1);
+        
+        var header2 = ['Designação do Ciclo de Estudos'];
+        var data2   = [[sanitize("<%= curso %>")]];
+        var config2 = {
+            tableWidth: 200,
+            margin: {right:14,left:14, top:40},
+            tableWidth: 'auto',
+            printHeaders : true,
+            headStyles :{fillColor : headColor}
+        }
+
+        doc.autoTable(header2,data2,config2);
+        
+        var header3 =['Código UC', 'Sigla da área científica', 'Ano', 'Semestre', 'Regime']
+        var data3 = [["Não preencher","<%= fuc[0].areaCienc  %>","<%= fuc[0].ano %>","<%= fuc[0].semestre  %>","<%= fuc[0].regime  %>"]]
+        var config3 = {
+            tableWidth: 200,
+            margin: {right:14,left:14, top:40},
+            tableWidth: 'auto',
+            printHeaders : true,
+            headStyles :{fillColor : headColor}
+        }
+        doc.autoTable(header3,data3,config3);
+
+        var header4 =['Duração', 'Nº horas de trabalho', 'Nº de horas de contato', 'ECTS']
+        var data4 =[["<%= fuc[0].duracao  %>","<%= fuc[0].horasTrab  %>","<%= fuc[0].horasContac %>", "<%= fuc[0].ECTS  %>"]]
+        var config4 = {
+            tableWidth: 200,
+            margin: {right:14,left:14, top:40},
+            tableWidth: 'auto',
+            printHeaders : true,
+            headStyles :{fillColor : headColor}
+        }
+        doc.autoTable(header4,data4,config4);
+    
+        var header5 =['Horas de contacto: tipologia', 'Nº horas de contacto', 'Nº horas assíncrono à distância', 'Nº horas sincronas à distância']
+        var data5 =[["Teórico (T)", "<%= fuc[0].T_horasC %>", "<%= fuc[0].T_horasAAsss %>","<%= fuc[0].T_horasSinc %>"],
+                    ["Teórico-Práticas (TP)", "<%= fuc[0].TP_horasC %>", "<%= fuc[0].TP_horasAAsss %>", "<%= fuc[0].TP_horasSinc %>"],
+                    ["Prático e laboratorial (PL)","<%= fuc[0].PL_horasC %>", "<%= fuc[0].PL_horasAAsss %>", "<%= fuc[0].PL_horasSinc %>"],
+                    ["Trabalho de campo (TC)", "<%= fuc[0].TC_horasC %>", "<%= fuc[0].TC_horasAAsss %>", "<%= fuc[0].TC_horasSinc %>"],
+                    ["Seminário (S)", "<%= fuc[0].S_horasC %>", "<%= fuc[0].S_horasAAsss %>", "<%= fuc[0].S_horasSinc %>"],
+                    ["Estágio (E)", "<%= fuc[0].E_horasC %>", "<%= fuc[0].E_horasAAsss %>", "<%= fuc[0].E_horasSinc %>"],
+                    ["Orientação toturial (OT)", "<%= fuc[0].OT_horasC %>", "<%= fuc[0].OT_horasAAsss %>", "<%= fuc[0].OT_horasSinc %>"],
+                    ["Outra (O)", "<%= fuc[0].O_horasC %>", "<%= fuc[0].O_orasAAsss %>", "<%= fuc[0].O_horasSinc %>"],
+                    ["Total de nº de horas", "<%= fuc[0].total_horasC %>","<%= fuc[0].total_horasAAsss %>","<%= fuc[0].total_horasSinc %>"]]    
+        
+        var config5 = {
+            tableWidth: 200,
+            margin: {right:14,left:14, top:40},
+            tableWidth: 'auto',
+            printHeaders : true,
+            headStyles :{fillColor : headColor}
+        }
+        doc.autoTable(header5,data5,config5);
+
+        var header6 =['Horas de contato (%)','']
+        var data6 =[["Presenciais: <%= fuc[0].percPresent %>", "À distância: <%= fuc[0].perDist %>"]];
+        var config6 = {
+            tableWidth: 200,
+            margin: {right:14,left:14, top:40},
+            tableWidth: 'auto',
+            printHeaders : true,
+            headStyles :{fillColor : headColor}
+        }
+        doc.autoTable(header6,data6,config6);
+
+        var header7 =['Docente responsável e respetiva carga letiva na unidade curricular','','']
+        var data7 =[[sanitize("Nome completo: <%= fuc[0].doc1Nome === '------------------------------' ? '' : fuc[0].doc1Nome %>"), "",""],
+                    [sanitize("Grau: <%= grau %>"), sanitize("Categoria profissional: <%= fuc[0].doc1Cat %>"), sanitize("Carga letiva: <%= fuc[0].doc1Carga %>")]];
+        var config7 = {
+            tableWidth: 200,
+            margin: {right:14,left:14, top:40},
+            tableWidth: 'auto',
+            printHeaders : true,
+            headStyles :{fillColor : headColor}
+        }
+        doc.autoTable(header7,data7,config7);
+
+        var header8 =['Outros docentes e respetivas cargas letivas na unidade curricular','','']
+        if(sanitize("<%= fuc[0].doc10Nome %>") != null && sanitize("<%= fuc[0].doc10Nome %>") != "" && sanitize("<%= fuc[0].doc10Nome %>") !== '------------------------------'){
+            var data8 =[[sanitize("Nome completo: <%= fuc[0].doc2Nome === '------------------------------' ? '' : fuc[0].doc2Nome  %>"), "",""],
+                    [sanitize("Grau: <%= grau2 %>"), sanitize("Categoria profissional: <%= fuc[0].doc2Cat %>"), sanitize("Carga letiva: <%= fuc[0].doc2Carga %>")],
+                    [sanitize("Nome completo: <%= fuc[0].doc3Nome === '------------------------------' ? '' : fuc[0].doc3Nome %>"), "",""],
+                    [sanitize("Grau: <%= grau3 %>"), sanitize("Categoria profissional: <%= fuc[0].doc3Cat %>"), sanitize("Carga letiva: <%= fuc[0].doc3Carga %>")],
+                    [sanitize("Nome completo: <%= fuc[0].doc4Nome === '------------------------------' ? '' : fuc[0].doc4Nome %>"), "",""],
+                    [sanitize("Grau: <%= grau4 %>"), sanitize("Categoria profissional: <%= fuc[0].doc4Cat %>"), sanitize("Carga letiva: <%= fuc[0].doc4Carga %>")],
+                    [sanitize("Nome completo: <%= fuc[0].doc5Nome === '------------------------------' ? '' : fuc[0].doc5Nome %>"), "",""],
+                    [sanitize("Grau: <%= grau5 %>"), sanitize("Categoria profissional: <%= fuc[0].doc5Cat %>"), sanitize("Carga letiva: <%= fuc[0].doc5Carga %>")],
+                    [sanitize("Nome completo: <%= fuc[0].doc6Nome === '------------------------------' ? '' : fuc[0].doc6Nome %>"), "",""],
+                    [sanitize("Grau: <%= grau6 %>"), sanitize("Categoria profissional: <%= fuc[0].doc6Cat %>"), sanitize("Carga letiva: <%= fuc[0].doc6Carga %>")],
+                    [sanitize("Nome completo: <%= fuc[0].doc7Nome === '------------------------------' ? '' : fuc[0].doc7Nome %>"), "",""],
+                    [sanitize("Grau: <%= grau7 %>"), sanitize("Categoria profissional: <%= fuc[0].doc7Cat %>"), sanitize("Carga letiva: <%= fuc[0].doc7Carga %>")],
+                    [sanitize("Nome completo: <%= fuc[0].doc8Nome === '------------------------------' ? '' : fuc[0].doc8Nome %>"), "",""],
+                    [sanitize("Grau: <%= grau8 %>"), sanitize("Categoria profissional: <%= fuc[0].doc8Cat %>"), sanitize("Carga letiva: <%= fuc[0].doc8Carga %>")],
+                    [sanitize("Nome completo: <%= fuc[0].doc9Nome === '------------------------------' ? '' : fuc[0].doc9Nome %>"), "",""],
+                    [sanitize("Grau: <%= grau9 %>"), sanitize("Categoria profissional: <%= fuc[0].doc9Cat %>"), sanitize("Carga letiva: <%= fuc[0].doc9Carga %>")],
+                    [sanitize("Nome completo: <%= fuc[0].doc10Nome === '------------------------------' ? '' : fuc[0].doc10Nome %>"), "",""],
+                    [sanitize("Grau: <%= grau10 %>"), sanitize("Categoria profissional: <%= fuc[0].doc10Cat %>"), sanitize("Carga letiva: <%= fuc[0].doc10Carga %>")]]
+        }else  if(sanitize("<%= fuc[0].doc9Nome %>") != null && sanitize("<%= fuc[0].doc9Nome %>") != "" && sanitize("<%= fuc[0].doc9Nome %>") !== '------------------------------'){
+            var data8 =[[sanitize("Nome completo: <%= fuc[0].doc2Nome === '------------------------------' ? '' : fuc[0].doc2Nome  %>"), "",""],
+                    [sanitize("Grau: <%= grau2 %>"), sanitize("Categoria profissional: <%= fuc[0].doc2Cat %>"), sanitize("Carga letiva: <%= fuc[0].doc2Carga %>")],
+                    [sanitize("Nome completo: <%= fuc[0].doc3Nome === '------------------------------' ? '' : fuc[0].doc3Nome %>"), "",""],
+                    [sanitize("Grau: <%= grau3 %>"), sanitize("Categoria profissional: <%= fuc[0].doc3Cat %>"), sanitize("Carga letiva: <%= fuc[0].doc3Carga %>")],
+                    [sanitize("Nome completo: <%= fuc[0].doc4Nome === '------------------------------' ? '' : fuc[0].doc4Nome %>"), "",""],
+                    [sanitize("Grau: <%= grau4 %>"), sanitize("Categoria profissional: <%= fuc[0].doc4Cat %>"), sanitize("Carga letiva: <%= fuc[0].doc4Carga %>")],
+                    [sanitize("Nome completo: <%= fuc[0].doc5Nome === '------------------------------' ? '' : fuc[0].doc5Nome %>"), "",""],
+                    [sanitize("Grau: <%= grau5 %>"), sanitize("Categoria profissional: <%= fuc[0].doc5Cat %>"), sanitize("Carga letiva: <%= fuc[0].doc5Carga %>")],
+                    [sanitize("Nome completo: <%= fuc[0].doc6Nome === '------------------------------' ? '' : fuc[0].doc6Nome %>"), "",""],
+                    [sanitize("Grau: <%= grau6 %>"), sanitize("Categoria profissional: <%= fuc[0].doc6Cat %>"), sanitize("Carga letiva: <%= fuc[0].doc6Carga %>")],
+                    [sanitize("Nome completo: <%= fuc[0].doc7Nome === '------------------------------' ? '' : fuc[0].doc7Nome %>"), "",""],
+                    [sanitize("Grau: <%= grau7 %>"), sanitize("Categoria profissional: <%= fuc[0].doc7Cat %>"), sanitize("Carga letiva: <%= fuc[0].doc7Carga %>")],
+                    [sanitize("Nome completo: <%= fuc[0].doc8Nome === '------------------------------' ? '' : fuc[0].doc8Nome %>"), "",""],
+                    [sanitize("Grau: <%= grau8 %>"), sanitize("Categoria profissional: <%= fuc[0].doc8Cat %>"), sanitize("Carga letiva: <%= fuc[0].doc8Carga %>")],
+                    [sanitize("Nome completo: <%= fuc[0].doc9Nome === '------------------------------' ? '' : fuc[0].doc9Nome %>"), "",""],
+                    [sanitize("Grau: <%= grau9 %>"), sanitize("Categoria profissional: <%= fuc[0].doc9Cat %>"), sanitize("Carga letiva: <%= fuc[0].doc9Carga %>")],
+                    [sanitize("Nome completo: <%= fuc[0].doc10Nome === '------------------------------' ? '' : fuc[0].doc10Nome %>"), "",""]]
+        }else if(sanitize("<%= fuc[0].doc8Nome %>") != null && sanitize("<%= fuc[0].doc8Nome %>") != "" && sanitize("<%= fuc[0].doc8Nome %>") !== '------------------------------'){
+            var data8 =[[sanitize("Nome completo: <%= fuc[0].doc2Nome === '------------------------------' ? '' : fuc[0].doc2Nome  %>"), "",""],
+                    [sanitize("Grau: grau2 %>"), sanitize("Categoria profissional: <%= fuc[0].doc2Cat %>"), sanitize("Carga letiva: <%= fuc[0].doc2Carga %>")],
+                    [sanitize("Nome completo: <%= fuc[0].doc3Nome === '------------------------------' ? '' : fuc[0].doc3Nome %>"), "",""],
+                    [sanitize("Grau: <%= grau3 %>"), sanitize("Categoria profissional: <%= fuc[0].doc3Cat %>"), sanitize("Carga letiva: <%= fuc[0].doc3Carga %>")],
+                    [sanitize("Nome completo: <%= fuc[0].doc4Nome === '------------------------------' ? '' : fuc[0].doc4Nome %>"), "",""],
+                    [sanitize("Grau: <%= grau4 %>"), sanitize("Categoria profissional: <%= fuc[0].doc4Cat %>"), sanitize("Carga letiva: <%= fuc[0].doc4Carga %>")],
+                    [sanitize("Nome completo: <%= fuc[0].doc5Nome === '------------------------------' ? '' : fuc[0].doc5Nome %>"), "",""],
+                    [sanitize("Grau: <%= grau5 %>"), sanitize("Categoria profissional: <%= fuc[0].doc5Cat %>"), sanitize("Carga letiva: <%= fuc[0].doc5Carga %>")],
+                    [sanitize("Nome completo: <%= fuc[0].doc6Nome === '------------------------------' ? '' : fuc[0].doc6Nome %>"), "",""],
+                    [sanitize("Grau: <%= grau6 %>"), sanitize("Categoria profissional: <%= fuc[0].doc6Cat %>"), sanitize("Carga letiva: <%= fuc[0].doc6Carga %>")],
+                    [sanitize("Nome completo: <%= fuc[0].doc7Nome === '------------------------------' ? '' : fuc[0].doc7Nome %>"), "",""],
+                    [sanitize("Grau: <%= grau7 %>"), sanitize("Categoria profissional: <%= fuc[0].doc7Cat %>"), sanitize("Carga letiva: <%= fuc[0].doc7Carga %>")],
+                    [sanitize("Nome completo: <%= fuc[0].doc8Nome === '------------------------------' ? '' : fuc[0].doc8Nome %>"), "",""],
+                    [sanitize("Grau: <%= grau8 %>"), sanitize("Categoria profissional: <%= fuc[0].doc8Cat %>"), sanitize("Carga letiva: <%= fuc[0].doc8Carga %>")]]
+        }else if(sanitize("<%= fuc[0].doc7Nome %>") != null && sanitize("<%= fuc[0].doc7Nome %>") != "" && sanitize("<%= fuc[0].doc7Nome %>") !== '------------------------------'){
+            var data8 =[[sanitize("Nome completo: <%= fuc[0].doc2Nome === '------------------------------' ? '' : fuc[0].doc2Nome  %>"), "",""],
+                    [sanitize("Grau: <%= grau2 %>"), sanitize("Categoria profissional: <%= fuc[0].doc2Cat %>"), sanitize("Carga letiva: <%= fuc[0].doc2Carga %>")],
+                    [sanitize("Nome completo: <%= fuc[0].doc3Nome === '------------------------------' ? '' : fuc[0].doc3Nome %>"), "",""],
+                    [sanitize("Grau: <%= grau3 %>"), sanitize("Categoria profissional: <%= fuc[0].doc3Cat %>"), sanitize("Carga letiva: <%= fuc[0].doc3Carga %>")],
+                    [sanitize("Nome completo: <%= fuc[0].doc4Nome === '------------------------------' ? '' : fuc[0].doc4Nome %>"), "",""],
+                    [sanitize("Grau: <%= grau4 %>"), sanitize("Categoria profissional: <%= fuc[0].doc4Cat %>"), sanitize("Carga letiva: <%= fuc[0].doc4Carga %>")],
+                    [sanitize("Nome completo: <%= fuc[0].doc5Nome === '------------------------------' ? '' : fuc[0].doc5Nome %>"), "",""],
+                    [sanitize("Grau: <%= grau5 %>"), sanitize("Categoria profissional: <%= fuc[0].doc5Cat %>"), sanitize("Carga letiva: <%= fuc[0].doc5Carga %>")],
+                    [sanitize("Nome completo: <%= fuc[0].doc6Nome === '------------------------------' ? '' : fuc[0].doc6Nome %>"), "",""],
+                    [sanitize("Grau: <%= grau6 %>"), sanitize("Categoria profissional: <%= fuc[0].doc6Cat %>"), sanitize("Carga letiva: <%= fuc[0].doc6Carga %>")],
+                    [sanitize("Nome completo: <%= fuc[0].doc7Nome === '------------------------------' ? '' : fuc[0].doc7Nome %>"), "",""]]
+        }else if(sanitize("<%= fuc[0].doc6Nome %>") != null && sanitize("<%= fuc[0].doc6Nome %>") != "" && sanitize("<%= fuc[0].doc6Nome %>") !== '------------------------------'){
+            var data8 =[[sanitize("Nome completo: <%= fuc[0].doc2Nome === '------------------------------' ? '' : fuc[0].doc2Nome  %>"), "",""],
+                    [sanitize("Grau: <%= grau2 %>"), sanitize("Categoria profissional: <%= fuc[0].doc2Cat %>"), sanitize("Carga letiva: <%= fuc[0].doc2Carga %>")],
+                    [sanitize("Nome completo: <%= fuc[0].doc3Nome === '------------------------------' ? '' : fuc[0].doc3Nome %>"), "",""],
+                    [sanitize("Grau: <%= grau3 %>"), sanitize("Categoria profissional: <%= fuc[0].doc3Cat %>"), sanitize("Carga letiva: <%= fuc[0].doc3Carga %>")],
+                    [sanitize("Nome completo: <%= fuc[0].doc4Nome === '------------------------------' ? '' : fuc[0].doc4Nome %>"), "",""],
+                    [sanitize("Grau: <%= grau4 %>"), sanitize("Categoria profissional: <%= fuc[0].doc4Cat %>"), sanitize("Carga letiva: <%= fuc[0].doc4Carga %>")],
+                    [sanitize("Nome completo: <%= fuc[0].doc5Nome === '------------------------------' ? '' : fuc[0].doc5Nome %>"), "",""],
+                    [sanitize("Grau: <%= grau5 %>"), sanitize("Categoria profissional: <%= fuc[0].doc5Cat %>"), sanitize("Carga letiva: <%= fuc[0].doc5Carga %>")],
+                    [sanitize("Nome completo: <%= fuc[0].doc6Nome === '------------------------------' ? '' : fuc[0].doc6Nome %>"), "",""],
+                    [sanitize("Grau: <%= grau6 %>"), sanitize("Categoria profissional: <%= fuc[0].doc6Cat %>"), sanitize("Carga letiva: <%= fuc[0].doc6Carga %>")]]
+        }else if(sanitize("<%= fuc[0].doc5Nome %>") != null && sanitize("<%= fuc[0].doc5Nome %>") != "" && sanitize("<%= fuc[0].doc5Nome %>") !== '------------------------------'){
+            var data8 =[[sanitize("Nome completo: <%= fuc[0].doc2Nome === '------------------------------' ? '' : fuc[0].doc2Nome  %>"), "",""],
+                    [sanitize("Grau: <%= grau2 %>"), sanitize("Categoria profissional: <%= fuc[0].doc2Cat %>"), sanitize("Carga letiva: <%= fuc[0].doc2Carga %>")],
+                    [sanitize("Nome completo: <%= fuc[0].doc3Nome === '------------------------------' ? '' : fuc[0].doc3Nome %>"), "",""],
+                    [sanitize("Grau: <%= grau3 %>"), sanitize("Categoria profissional: <%= fuc[0].doc3Cat %>"), sanitize("Carga letiva: <%= fuc[0].doc3Carga %>")],
+                    [sanitize("Nome completo: <%= fuc[0].doc4Nome === '------------------------------' ? '' : fuc[0].doc4Nome %>"), "",""],
+                    [sanitize("Grau: <%= grau4 %>"), sanitize("Categoria profissional: <%= fuc[0].doc4Cat %>"), sanitize("Carga letiva: <%= fuc[0].doc4Carga %>")],
+                    [sanitize("Nome completo: <%= fuc[0].doc5Nome === '------------------------------' ? '' : fuc[0].doc5Nome %>"), "",""],
+                    [sanitize("Grau: <%= grau5 %>"), sanitize("Categoria profissional: <%= fuc[0].doc5Cat %>"), sanitize("Carga letiva: <%= fuc[0].doc5Carga %>")]]
+        }else if(sanitize("<%= fuc[0].doc4Nome %>") != null && sanitize("<%= fuc[0].doc4Nome %>") != "" && sanitize("<%= fuc[0].doc4Nome %>") !== '------------------------------'){
+            var data8 =[[sanitize("Nome completo: <%= fuc[0].doc2Nome === '------------------------------' ? '' : fuc[0].doc2Nome  %>"), "",""],
+                    [sanitize("Grau: <%= grau2 %>"), sanitize("Categoria profissional: <%= fuc[0].doc2Cat %>"), sanitize("Carga letiva: <%= fuc[0].doc2Carga %>")],
+                    [sanitize("Nome completo: <%= fuc[0].doc3Nome === '------------------------------' ? '' : fuc[0].doc3Nome %>"), "",""],
+                    [sanitize("Grau: <%= grau3 %>"), sanitize("Categoria profissional: <%= fuc[0].doc3Cat %>"), sanitize("Carga letiva: <%= fuc[0].doc3Carga %>")],
+                    [sanitize("Nome completo: <%= fuc[0].doc4Nome === '------------------------------' ? '' : fuc[0].doc4Nome %>"), "",""],
+                    [sanitize("Grau: <%= grau4 %>"), sanitize("Categoria profissional: <%= fuc[0].doc4Cat %>"), sanitize("Carga letiva: <%= fuc[0].doc4Carga %>")]]
+        }else{
+            var data8 =[[sanitize("Nome completo: <%= fuc[0].doc2Nome === '------------------------------' ? '' : fuc[0].doc2Nome  %>"), "",""],
+                    [sanitize("Grau: <%= grau2 %>"), sanitize("Categoria profissional: <%= fuc[0].doc2Cat %>"), sanitize("Carga letiva: <%= fuc[0].doc2Carga %>")],
+                    [sanitize("Nome completo: <%= fuc[0].doc3Nome === '------------------------------' ? '' : fuc[0].doc3Nome %>"), "",""],
+                    [sanitize("Grau: <%= grau3 %>"), sanitize("Categoria profissional: <%= fuc[0].doc3Cat %>"), sanitize("Carga letiva: <%= fuc[0].doc3Carga %>")]];
+        }
+        var config8 = {
+            tableWidth: 200,
+            margin: {right:14,left:14, top:40},
+            tableWidth: 'auto',
+            printHeaders : true,
+            headStyles :{fillColor : headColor}
+        }
+        doc.autoTable(header8,data8,config8);
+
+        var header9 =['Objetivos de aprendizagem e a sua compatibilidade com o método (conhecimentos, aptidões e competências a desenvolver pelos estudantes)']
+        var data9 =[[sanitize(`<%= fuc[0].conteudos %>`)]]
+        var config9 = {
+            tableWidth: 200,
+            margin: {right:14,left:14, top:40},
+            tableWidth: 'auto',
+            printHeaders : true,
+            headStyles :{fillColor : headColor}
+        }
+        doc.autoTable(header9,data9,config9);
+
+        var header10 =['Learning outcomes and its compatibility with teaching methods (Knowledge, skills and competences to be developed by students)']
+        var data10 =[[sanitize(`<%= fuc[0].conteudosEn %>`)]]
+        var config10 = {
+            tableWidth: 200,
+            margin: {right:14,left:14, top:40},
+            tableWidth: 'auto',
+            printHeaders : true,
+            headStyles :{fillColor : headColor}
+        }
+        doc.autoTable(header10,data10,config10);
+
+        var header11 =['Conteúdos programáticos']
+        var data11 =[[sanitize(`<%= fuc[0].obetivos %>`)]]
+        var config11 = {
+            tableWidth: 200,
+            margin: {right:14,left:14, top:40},
+            tableWidth: 'auto',
+            printHeaders : true,
+            headStyles :{fillColor : headColor}
+        }
+        doc.autoTable(header11,data11,config11);
+
+        var header12 =['Syllabus']
+        var data12 =[[sanitize(`<%= fuc[0].obetivosEn %>`)]]
+        var config12 = {
+            tableWidth: 200,
+            margin: {right:14,left:14, top:40},
+            tableWidth: 'auto',
+            printHeaders : true,
+            headStyles :{fillColor : headColor}
+        }
+        doc.autoTable(header12,data12,config12);
+
+        var header13 =['Demonstração da coerência dos conteúdos programáticos com os objetivos de aprendizagem da unidade curricular']
+        var data13 =[[sanitize(`<%= fuc[0].demoConte %>`)]]
+        var config13 = {
+            tableWidth: 200,
+            margin: {right:14,left:14, top:40},
+            tableWidth: 'auto',
+            printHeaders : true,
+            headStyles :{fillColor : headColor}
+        }
+        doc.autoTable(header13,data13,config13);
+
+        var header14 =['Demonstration of the syllabus coherence with the curricular unit’s intended learning outcomes']
+        var data14 =[[sanitize(`<%= fuc[0].demoConteEn %>`)]]
+        var config14 = {
+            tableWidth: 200,
+            margin: {right:14,left:14, top:40},
+            tableWidth: 'auto',
+            printHeaders : true,
+            headStyles :{fillColor : headColor}
+        }
+        doc.autoTable(header14,data14,config14);
+
+        var header15 =['Metodologias de ensino e de aprendizagem específicas da unidade curricular articuladas com o modelo pedagógico']
+        var data15 =[[sanitize(`<%= fuc[0].metodos %>`)]]
+        var config15 = {
+            tableWidth: 200,
+            margin: {right:14,left:14, top:40},
+            tableWidth: 'auto',
+            printHeaders : true,
+            headStyles :{fillColor : headColor}
+        }
+        doc.autoTable(header15,data15,config15);
+
+        var header16 =['Specific teaching and learning methodologies of the curricular unit in articulation with the pedagogic model']
+        var data16 =[[sanitize(`<%= fuc[0].metodosEn %>`)]]
+        var config16 = {
+            tableWidth: 200,
+            margin: {right:14,left:14, top:40},
+            tableWidth: 'auto',
+            printHeaders : true,
+            headStyles :{fillColor : headColor}
+        }
+        doc.autoTable(header16,data16,config16);
+
+        var header17 =['Avaliação']
+        var data17 =[[sanitize(`<%= fuc[0].avaliacao %>`)]]
+        var config17 = {
+            tableWidth: 200,
+            margin: {right:14,left:14, top:40},
+            tableWidth: 'auto',
+            printHeaders : true,
+            headStyles :{fillColor : headColor}
+        }
+        doc.autoTable(header17,data17,config17);
+
+        var header18 =['Evaluation']
+        var data18 =[[sanitize(`<%= fuc[0].avaliacaoEn %>`)]]
+        var config18 = {
+            tableWidth: 200,
+            margin: {right:14,left:14, top:40},
+            tableWidth: 'auto',
+            printHeaders : true,
+            headStyles :{fillColor : headColor}
+        }
+        doc.autoTable(header18,data18,config18);
+
+        var header19 =['Demonstração da coerência das metodologias de ensino e avaliação com os objetivos de aprendizagem da unidade curricular']
+        var data19 =[[sanitize(`<%= fuc[0].demoMetodo %>`)]]
+        var config19 = {
+            tableWidth: 200,
+            margin: {right:14,left:14, top:40},
+            tableWidth: 'auto',
+            printHeaders : true,
+            headStyles :{fillColor : headColor}
+        }
+        doc.autoTable(header19,data19,config19);
+
+        var header20 =['Demonstration of the teaching and evaluation methodologies in articulation with the curricular unit’s intended learning outcomes']
+        var data20 =[[sanitize(`<%= fuc[0].demoMetodoEn %>`)]]
+        var config20 = {
+            tableWidth: 200,
+            margin: {right:14,left:14, top:40},
+            tableWidth: 'auto',
+            printHeaders : true,
+            headStyles :{fillColor : headColor}
+        }
+        doc.autoTable(header20,data20,config20);
+
+        var header21 =['Bibliografia de consulta/ existência obrigatória (norma APA, 7.ª Edição)']
+        var data21 =[[sanitize(`<%= fuc[0].biblio %>`)],[sanitize(`<%= fuc[0].biblio2 %>`)], [sanitize(`<%= fuc[0].biblio3 %>`)], [sanitize(`<%= fuc[0].biblio4 %>`)],[sanitize(`<%= fuc[0].biblio5 %>`)]]
+        var config21 = {
+            tableWidth: 200,
+            margin: {right:14,left:14, top:40},
+            tableWidth: 'auto',
+            printHeaders : true,
+            headStyles :{fillColor : headColor}
+        }
+        doc.autoTable(header21,data21,config21);
+
+        var header22 =['Observações']
+        var data22 =[[sanitize(`<%= fuc[0].obs %>`)]]
+        var config22 = {
+            tableWidth: 200,
+            margin: {right:14,left:14, top:40},
+            tableWidth: 'auto',
+            printHeaders : true,
+            headStyles :{fillColor : headColor}
+        }
+        doc.autoTable(header22,data22,config22);
+
+        var header23 =['Observations']
+        var data23 =[[sanitize(`<%= fuc[0].obsEn %>`)]]
+        var config23 = {
+            tableWidth: 200,
+            margin: {right:14,left:14, top:40},
+            tableWidth: 'auto',
+            printHeaders : true,
+            headStyles :{fillColor : headColor}
+        }
+        doc.autoTable(header23,data23,config23);
+        
+        // var header24 =['Objectivos de Desenvolvimento Sustentável']
+        // var data24 =[[``]]
+        // var config24 = {
+        //     tableWidth: 200,
+        //     margin: {right:10,left:10, top:40},
+        //     tableWidth: 'auto',
+        //     printHeaders : true
+        // }
+
+        // doc.autoTable(header24,data24,{drawHeaderRow: function(row, data) {
+        //                                             if (data.pageCount > 1) {
+        //                                                 return false;
+        //                                             }
+        //                                         }
+        //                                     },config24);                                     
+
+
+        var header25=["","", ""]
+        var data25 =[[`Docente da UC Responsável pela Revisão desta FUC: <%= fuc[0].docRespFuc %>`],
+                    [`Coordenador do CE Responsável pela Validação: <%= fuc[0].coordCe %>`],
+                    [`Ano Letivo <%= fuc[0].anoLetivoFuc %>`, `Data da Revisão desta FUC: <%= fuc[0].dtaRevFuc %>`, `Data da Validação desta FUC: <%= fuc[0].dtaConfFuc %>`]]
+        var config25 = {
+            tableWidth: 200,
+            margin: {right:14,left:14, top:40},
+            tableWidth: 'auto',
+            printHeaders : true,
+            headStyles :{fillColor : headColor}
+        }
+
+        doc.autoTable(header25,data25,config25);
+
+        addFooters(doc)
+        doc.save("<%= fuc[0].curso_sigla %>_<%= fuc[0].nomeUCPt %>.pdf");      
+        
+        setTimeout(function (){
+  
+          window.close();
+                
+        }, 1000);
+    }       
+         
+</script>
+
+
+<%- include('partials/footer') %>

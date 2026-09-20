@@ -1,0 +1,64 @@
+<%- include('partials/header') %>
+<style>
+	.nolink{
+		text-decoration: none;
+		color: #191919 !important;
+	}
+</style>
+<div class="container mt-5">
+	<div class="row">
+		<div class="col-md-8">
+			<p class="h2 text-red">Fichas de Unidade Curricular</p>
+		</div>
+		<div class="col-md-4">
+			<p class="h2 text-red"><%= anoLetivo.replace('_','/') %></p>
+			<input type="hidden" id="anoLetivo" name="anoLetivo" value="<%= anoLetivo %>">
+		</div>
+	</div>
+    <div class="row mt-3">
+    	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xl-4 col-md-6 col-xs-12">
+				<table class="table table-bordeless table-sm table-hover">
+					<thead>
+						<tr><th>Licenciaturas</th></tr>
+					</thead>
+					<tbody>
+						<% cursos.forEach(curso => { %>
+							<% if(curso.sigla.startsWith('L-')){ %>
+        						<tr><td><a href="../curso/<%= curso.sigla %>/<%= anoLetivo %>" class="nolink"><%= curso.nome %></a></td></tr>
+							<% } %>
+						<% }); %>
+					</tbody>
+				</table>
+			</div>
+			<div class="col-xl-4 col-md-6 col-xs-12">
+				<table class="table table-bordeless table-sm table-hover">
+					<thead>
+						<tr><th>Mestrados</th></tr>
+					</thead>
+					<tbody>
+						<% cursos.forEach(curso => { %>
+							<% if(curso.sigla.startsWith('M-')){ %>
+        						<tr><td><a href="../curso/<%= curso.sigla %>/<%= anoLetivo %>" class="nolink"><%= curso.nome %></a></td></tr>
+							<% } %>
+						<% }); %>
+					</tbody>
+				</table>
+
+			</div>
+			<div class="col-xl-4 col-md-6 col-xs-12">
+				
+			</div>
+			<div class="row my-3">
+				<a href="../anoFuc" class="btn btn-outline-primary"><i class="fas fa-angle-double-left"></i></a>
+			</div>
+			<div class="row my-3">
+				<p class="h6 ">Para inserir ou editar FUC aceda <a href="https://fucs.uatlantica.pt/login" target="_blank">aqui</a></p>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<%- include('partials/footer') %>

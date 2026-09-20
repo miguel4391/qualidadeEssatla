@@ -1,0 +1,266 @@
+<%- include('partials/header') %>
+
+<div class="container mt-5">
+	<div class="row">
+		<div class="col-md-12">
+			<p class="h2 text-red"><% if (fuc[0]) {%>  
+										FUC - <%= fuc[0].nomeCE %>
+									<% } %> </p>
+			<p class="h2 text-red"><%= fuc[0].anoLetivoFuc %></p>
+		</div>
+		<div class="row my-3">
+			<div class="col-3 offset-10"><a href="/multPdf/<%= fuc[0].curso_sigla %>/<%= fuc[0].anoLetivoFuc.replace('/', '_') %>"class="btn btn-outline-danger" target="_blank">Exportar para PDF <i class="fa-solid fa-file-pdf"></i></a></div>
+		</div>
+	</div>
+    <div class="row mt-5">
+		<div class="col-md-4 col-xs-8">
+			<p class="h6 text-red">1º Semestre</p>	
+        	<table class="table table-striped" name="fileTable" id="fileTable">
+          		<thead>
+            		<tr class="text-red">
+              			<th scope="col">Unidade Curricular</th>
+            		</tr>
+          		</thead>
+          		<tbody>
+					<% if(fuc[0].curso_sigla=="M-Fis"){ %>
+						<tr>
+							<td><a href="/fuc/<%= fuc[0].nomeCE %>/Investigação em Fisioterapia I/<%= fuc[0].anoLetivoFuc.replace('/', '_') %>" target="_blank">Investigação em Fisioterapia I</a></td>
+						</tr>
+						<tr class="text-red">
+              				<th scope="col">ESPECIALIZAÇÃO GESTÃO E LIDERANÇA EM FISIOTERAPIA</th>
+            			</tr>
+						<tr>
+							<td><a href="/fuc/<%= fuc[0].nomeCE %>/Comunicação nos Serviços de Saúde/<%= fuc[0].anoLetivoFuc.replace('/', '_') %>" target="_blank">Comunicação nos Serviços de Saúde</a></td>
+						</tr>
+						<tr>
+							<td><a href="/fuc/<%= fuc[0].nomeCE %>/Estratégias de Marketing nos Serviços de Saúde/<%= fuc[0].anoLetivoFuc.replace('/', '_') %>" target="_blank">Estratégias de Marketing nos Serviços de Saúde</a></td>
+						</tr>
+						<tr>
+							<td><a href="/fuc/<%= fuc[0].nomeCE %>/Gestão e Governança Aplicadas à Fisioterapia/<%= fuc[0].anoLetivoFuc.replace('/', '_') %>" target="_blank">Gestão e Governança Aplicadas à Fisioterapia</a></td>
+						</tr>
+						<tr>
+							<td><a href="/fuc/<%= fuc[0].nomeCE %>/Gestão e Liderança/<%= fuc[0].anoLetivoFuc.replace('/', '_') %>" target="_blank">Gestão e Liderança</a></td>
+						</tr>
+						<tr>
+							<td><a href="/fuc/<%= fuc[0].nomeCE %>/Gestão e Logística em Fisioterapia/<%= fuc[0].anoLetivoFuc.replace('/', '_') %>" target="_blank">Gestão e Logística em Fisioterapia</a></td>
+						</tr>
+						<tr class="text-red">
+              				<th scope="col">ESPECIALIZAÇÃO EM REABILITAÇÃO CARDIOVASCULAR E METABÓLICA</th>
+            			</tr>
+						<tr>
+							<td><a href="/fuc/<%= fuc[0].nomeCE %>/Fisioterapia Cardiorespiratória/<%= fuc[0].anoLetivoFuc.replace('/', '_') %>" target="_blank">Fisioterapia Cardiorespiratória</a></td>
+						</tr>
+						<tr>
+							<td><a href="/fuc/<%= fuc[0].nomeCE %>/Métodos de Avaliação em Fisioterapia Cardiovascular/<%= fuc[0].anoLetivoFuc.replace('/', '_') %>" target="_blank">Métodos de Avaliação em Fisioterapia Cardiovascular</a></td>
+						</tr>
+						<tr>
+							<td><a href="/fuc/<%= fuc[0].nomeCE %>/Tópicos Avançados em Fisioterapia Cardiovascular I/<%= fuc[0].anoLetivoFuc.replace('/', '_') %>" target="_blank">Tópicos Avançados em Fisioterapia Cardiovascular I</a></td>
+						</tr>
+						<tr>
+							<td><a href="/fuc/<%= fuc[0].nomeCE %>/Tópicos Avançados na Doença Metabólica I/<%= fuc[0].anoLetivoFuc.replace('/', '_') %>" target="_blank">Tópicos Avançados na Doença Metabólica I</a></td>
+						</tr>
+					<% } else {%>
+						<% fuc.forEach(function(file){ %>
+							<% if(file.ano === '1º' && file.semestre === '1º'){ %>
+								<tr>
+									<td><a href="/fuc/<%= fuc[0].nomeCE %>/<%= file.nomeUCPt %>/<%= fuc[0].anoLetivoFuc.replace('/', '_') %>" target="_blank"><%= file.nomeUCPt %></a></td>
+								</tr>
+							<% } %>
+						<% }) %>
+					<% } %> 
+          		</tbody>
+        	</table>
+    	</div>
+    	<div class="col-md-4 col-xs-8">
+			<p class="h6 text-red">2º Semestre</p>	
+        	<table class="table table-striped" name="fileTable" id="fileTable">
+          		<thead>
+            		<tr class="text-red">
+              			<th scope="col">Unidade Curricular</th>
+            		</tr>
+          		</thead>
+          		<tbody>
+					<% if(fuc[0].curso_sigla=="M-Fis"){ %>
+						<tr>
+							<td><a href="/fuc/<%= fuc[0].nomeCE %>/Investigação em Fisioterapia II/<%= fuc[0].anoLetivoFuc.replace('/', '_') %>" target="_blank">Investigação em Fisioterapia II</a></td>
+						</tr>
+						<tr class="text-red">
+              				<th scope="col">ESPECIALIZAÇÃO GESTÃO E LIDERANÇA EM FISIOTERAPIA</th>
+            			</tr>
+						<tr>
+							<td><a href="/fuc/<%= fuc[0].nomeCE %>/Empreendedorismo e Inovação em Fisioterapia/<%= fuc[0].anoLetivoFuc.replace('/', '_') %>" target="_blank">Empreendedorismo e Inovação em Fisioterapia</a></td>
+						</tr>
+						<tr>
+							<td><a href="/fuc/<%= fuc[0].nomeCE %>/Gestão da Qualidade e Segurança em Fisioterapia/<%= fuc[0].anoLetivoFuc.replace('/', '_') %>" target="_blank">Gestão da Qualidade e Segurança em Fisioterapia</a></td>
+						</tr>
+						<tr>
+							<td><a href="/fuc/<%= fuc[0].nomeCE %>/Gestão e Finanças em Saúde/<%= fuc[0].anoLetivoFuc.replace('/', '_') %>" target="_blank">Gestão e Finanças em Saúde</a></td>
+						</tr>
+						<tr>
+							<td><a href="/fuc/<%= fuc[0].nomeCE %>/Política e Regulamentação da Saúde/<%= fuc[0].anoLetivoFuc.replace('/', '_') %>" target="_blank">Política e Regulamentação da Saúde</a></td>
+						</tr>
+						<tr class="text-red">
+              				<th scope="col">ESPECIALIZAÇÃO EM REABILITAÇÃO CARDIOVASCULAR E METABÓLICA</th>
+            			</tr>
+						<tr>
+							<td><a href="/fuc/<%= fuc[0].nomeCE %>/Métodos de Intervenção em Fisioterapia Cardiovascular/<%= fuc[0].anoLetivoFuc.replace('/', '_') %>" target="_blank">Métodos de Intervenção em Fisioterapia Cardiovascular</a></td>
+						</tr>
+						<tr>
+							<td><a href="/fuc/<%= fuc[0].nomeCE %>/Seminários/<%= fuc[0].anoLetivoFuc.replace('/', '_') %>" target="_blank">Seminários</a></td>
+						</tr>
+						<tr>
+							<td><a href="/fuc/<%= fuc[0].nomeCE %>/Tópicos Avançados em Fisioterapia Cardiovascular II/<%= fuc[0].anoLetivoFuc.replace('/', '_') %>" target="_blank">Tópicos Avançados em Fisioterapia Cardiovascular II</a></td>
+						</tr>
+						<tr>
+							<td><a href="/fuc/<%= fuc[0].nomeCE %>/Tópicos Avançados na Doença Metabólica II/<%= fuc[0].anoLetivoFuc.replace('/', '_') %>" target="_blank">Tópicos Avançados na Doença Metabólica II</a></td>
+						</tr>
+					<% } else { %>
+						<% fuc.forEach(function(file){ %>
+							<% if(file.ano === '1º' && file.semestre == '2º'){ %>
+								<tr>
+									<td><a href="/fuc/<%= fuc[0].nomeCE %>/<%= file.nomeUCPt %>/<%= fuc[0].anoLetivoFuc.replace('/', '_') %>" target="_blank"><%= file.nomeUCPt %></a></td>
+								</tr>
+							<% } %>
+						<% }) %> 
+					<% } %>
+          		</tbody>
+        	</table>
+    	</div>
+	</div>
+	<% if(sem >= 3){ %>
+    <div class="row mt-3">
+		<div class="col-md-4 col-xs-8">
+			<p class="h6 text-red">3º Semestre</p>	
+        	<table class="table table-striped" name="fileTable" id="fileTable">
+          		<thead>
+            		<tr class="text-red">
+              			<th scope="col">Unidade Curricular</th>
+            		</tr>
+          		</thead>
+          		<tbody>
+                	<% fuc.forEach(function(file){ %>
+                    	<% if(file.ano === '2º' && file.semestre === '1º'){ %>
+							<tr>
+                        		<td><a href="/fuc/<%= fuc[0].nomeCE %>/<%= file.nomeUCPt %>/<%= fuc[0].anoLetivoFuc.replace('/', '_') %>" target="_blank"><%= file.nomeUCPt %></a></td>
+                    		</tr>
+						<% } %>
+                	<% }) %> 
+          		</tbody>
+        	</table>
+    	</div>
+		<% if(sem >= 4){ %>
+    	<div class="col-md-4 col-xs-8">
+			<p class="h6 text-red">4º Semestre</p>	
+        	<table class="table table-striped" name="fileTable" id="fileTable">
+          		<thead>
+            		<tr class="text-red">
+              			<th scope="col">Unidade Curricular</th>
+            		</tr>
+          		</thead>
+          		<tbody>
+                	<% fuc.forEach(function(file){ %>
+                    	<% if(file.ano === '2º' && file.semestre == '2º'){ %>
+							<tr>
+                        		<td><a href="/fuc/<%= fuc[0].nomeCE %>/<%= file.nomeUCPt %>/<%= fuc[0].anoLetivoFuc.replace('/', '_') %>" target="_blank"><%= file.nomeUCPt %></a></td>
+                    		</tr>
+						<% } %>
+                	<% }) %> 
+          		</tbody>
+        	</table>
+    	</div>
+		<% } %>
+	</div>
+    <% } %>
+	<% if(sem >= 5){ %>
+	<div class="row mt-3">
+		<div class="col-md-4 col-xs-8">
+			<p class="h6 text-red">5º Semestre</p>	
+        	<table class="table table-striped" name="fileTable" id="fileTable">
+          		<thead>
+            		<tr class="text-red">
+              			<th scope="col">Unidade Curricular</th>
+            		</tr>
+          		</thead>
+          		<tbody>
+                	<% fuc.forEach(function(file){ %>
+                    	<% if(file.ano === '3º' && file.semestre === '1º'){ %>
+							<tr>
+                        		<td><a href="/fuc/<%= fuc[0].nomeCE %>/<%= file.nomeUCPt %>/<%= fuc[0].anoLetivoFuc.replace('/', '_') %>" target="_blank"><%= file.nomeUCPt %></a></td>
+                    		</tr>
+						<% } %>
+                	<% }) %> 
+          		</tbody>
+        	</table>
+    	</div>
+    	<div class="col-md-4 col-xs-8">
+			<p class="h6 text-red">6º Semestre</p>	
+        	<table class="table table-striped" name="fileTable" id="fileTable">
+          		<thead>
+            		<tr class="text-red">
+              			<th scope="col">Unidade Curricular</th>
+            		</tr>
+          		</thead>
+          		<tbody>
+                	<% fuc.forEach(function(file){ %>
+                    	<% if(file.ano === '3º' && file.semestre == '2º'){ %>
+							<tr>
+                        		<td><a href="/fuc/<%= fuc[0].nomeCE %>/<%= file.nomeUCPt %>/<%= fuc[0].anoLetivoFuc.replace('/', '_') %>" target="_blank"><%= file.nomeUCPt %></a></td>
+                    		</tr>
+						<% } %>
+                	<% }) %> 
+          		</tbody>
+        	</table>
+		</div>
+		<% } %>
+	</div>
+		<% if(sem >= 7){ %>
+    		<div class="row mt-5">
+				<div class="col-md-4 col-xs-8">
+					<p class="h6 text-red">7º Semestre</p>	
+        			<table class="table table-striped" name="fileTable" id="fileTable">
+          				<thead>
+            				<tr class="text-red">
+              					<th scope="col">Unidade Curricular</th>
+            				</tr>
+          				</thead>
+          				<tbody>
+                			<% fuc.forEach(function(file){ %>
+                    			<% if(file.ano === '4º' && file.semestre === '1º'){ %>
+									<tr>
+                        				<td><a href="/fuc/<%= fuc[0].nomeCE %>/<%= file.nomeUCPt %>/<%= fuc[0].anoLetivoFuc.replace('/', '_') %>" target="_blank"><%= file.nomeUCPt %></a></td>
+                    				</tr>
+								<% } %>
+                			<% }) %> 
+          				</tbody>
+        			</table>
+    			</div>
+    			<div class="col-md-4 col-xs-8">
+					<p class="h6 text-red">8º Semestre</p>	
+        			<table class="table table-striped" name="fileTable" id="fileTable">
+          				<thead>
+            				<tr class="text-red">
+              					<th scope="col">Unidade Curricular</th>
+            				</tr>
+          				</thead>
+          				<tbody>
+                			<% fuc.forEach(function(file){ %>
+                    			<% if(file.ano === '4º' && file.semestre == '2º'){ %>
+									<tr>
+                        				<td><a href="/fuc/<%= fuc[0].nomeCE %>/<%= file.nomeUCPt %>/<%= fuc[0].anoLetivoFuc.replace('/', '_') %>" target="_blank"><%= file.nomeUCPt %></a></td>
+                    				</tr>
+								<% } %>
+                			<% }) %> 
+          				</tbody>
+        			</table>
+    			</div>
+			</div>
+		<% } %>
+	
+    <div class="row my-3">
+      <a href="/anoFuc" class="btn btn-outline-primary"><i class="fas fa-angle-double-left"></i></a>
+    </div>
+</div>
+
+<script src="javascript/searchfilter.js" type="text/javascript"></script>
+
+<%- include('partials/footer') %>
