@@ -569,7 +569,7 @@ var pdf = function getPdf(curso,fuc, lstDoc, callback){
                 data.push(
                     [{ text: "Nome completo: " + createSlug(nome), colSpan: 3 }],
                     [
-                        "Grau: " + createSlug(grau3),
+                        "Grau: " + createSlu),
                         "Categoria profissional: " + createSlug(fuc[j]["doc" + i + "Cat"]),
                         "Carga letiva: " + createSlug(fuc[j]["doc" + i + "Carga"])
                     ]

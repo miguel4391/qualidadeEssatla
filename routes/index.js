@@ -579,6 +579,132 @@ router.post("/setInvestigacao", (req, res) =>{
 })
 
 
+// routes/colaborador.js
+const InsertColaborador = require('../models/colaborador');
+const GetColaboradorByNumero = require('../models/getColaboradorByNumero');
+let pool = require('../models/dbconnection.js');
+const query = (sql) => new Promise((resolve, reject) => {
+    pool.query(sql, (err, results) => err ? reject(err) : resolve(results));
+});
+
+async function carregarOpcoes() {
+    const [regimes, niveisQNQ, funcoes, areasFunc, catColab, cnaef] = await Promise.all([
+        query('SELECT idtbOpcaoRegimeColab, nome FROM Qualidade.tbOpcaoRegimeColab ORDER BY nome'),
+        query('SELECT idtbOpcaoNiveisQNQ, nome, nivel FROM Qualidade.tbOpcaoNiveisQNQ ORDER BY nivel'),
+        query('SELECT idtbOpcaoFuncaoColab, nome FROM Qualidade.tbOpcaoFuncaoColab ORDER BY nome'),
+        query('SELECT idtbOpcaoAreasFunc, nome, sigla FROM Qualidade.tbOpcaoAreasFunc ORDER BY nome'),
+        query('SELECT idtrOpcaoCatColab, nome FROM Qualidade.trOpcaoCatColab WHERE ativo = 1 ORDER BY nome'),
+		query('SELECT idtbOpcaoAreaCient3Niv, nomeAreaCient FROM Qualidade.tbOpcaoAreaCient3Niv ORDER BY nomeAreaCient')
+    ]);
+    return { regimes, niveisQNQ, funcoes, areasFunc, catColab, cnaef };
+}
+
+async function carregarColaborador(req) {
+    const user = req.session.passport.user.sAMAccountName;
+
+    try {
+        const resultado = await query(
+            "SELECT numero FROM Qualidade.Colaborador WHERE email LIKE '" + user + "%' and ativo = 1 LIMIT 1"
+        );
+
+        if (!resultado || resultado.length === 0) {
+            return null;
+        }
+
+        return resultado[0].numero;
+
+    } catch (err) {
+        console.error('Erro ao carregar colaborador:', err);
+        throw err;
+    }
+}
+
+// Editar colaborador existente -> form preenchido (colab = registo encontrado)
+router.get('/fichaColab', isLoggedIn, async (req, res) => {
+    try {
+		const opcoes = await carregarOpcoes();
+
+		const numeroColaborador = await carregarColaborador(req);
+
+		console.log('Número colaborador ->', numeroColaborador);
+
+		if (!numeroColaborador) {
+			res.render('colabInvalido');
+		}
+
+		GetColaboradorByNumero(numeroColaborador, (err, colab) => {
+			if (err) {
+				console.error('Erro ao procurar colaborador:', err);
+				res.render('colabInvalido');
+			}
+
+			if (!colab) {
+				res.render('colabInvalido');
+			}
+
+			res.render('fichaColab', { ...opcoes, colab });
+		});
+
+	} catch (err) {
+		console.error('Erro ao carregar dados da fichaColab:', err);
+		res.status(500).send('Erro ao carregar dados');
+	}
+});
+
+router.post('/enviarColab', (req, res) => {
+    const b = req.body;
+ 
+    // Validação dos campos "required" no form
+    if (!b.tbNumero || !b.tbNome || !b.tbDataAdmissao || !b.tbEmail) {
+        return res.status(400).send('Preenche os campos obrigatórios: Nº, Nome, Data de Admissão e Email.');
+    }
+ 
+    // Validação do email institucional: formato válido e domínio @uatlantica.pt
+    const emailRegex = /^[^\s@]+@uatlantica\.pt$/i;
+    if (!emailRegex.test(b.tbEmail.trim())) {
+        return res.status(400).send('Email inválido. Tem de ser um endereço @uatlantica.pt.');
+    }
+ 
+    const v = (val) => (val === undefined || val === null || val === '' ? null : val);
+ 
+    // CORREÇÃO: cbDepartamento agora é um <select multiple>. Se o utilizador
+    // escolher só UMA opção, o Express entrega uma string; se escolher VÁRIAS,
+    // entrega um array. Normalizamos sempre para array antes de gravar.
+    const idsAreaFunc = Array.isArray(b.cbDepartamento)
+        ? b.cbDepartamento
+        : (b.cbDepartamento ? [b.cbDepartamento] : []);
+ 
+    InsertColaborador(
+        b.tbNumero,
+        b.tbNome,
+        b.tbDataAdmissao,
+        b.tbEmail,
+ 
+        v(b.cbCatProfissional),// idCatColab
+        v(b.cbCargo),          // idFuncao
+        v(b.cbTipoContrato),   // idRegime
+        v(b.tbCargaHoraria),   // cargaHoraria
+        v(b.cbQNQ),            // idNivelQNQ
+        v(b.tbAreaForma),      // areaFormacao
+        v(b.tbOutForma),       // outrasFormacoes
+        idsAreaFunc,           // array de idAreaFunc selecionados
+ 
+        (err, result) => {
+            if (err) {
+                console.error('Erro ao gravar Colaborador:', err);
+                // erro típico: numero duplicado (chave única) -> código ER_DUP_ENTRY
+                if (err.code === 'ER_DUP_ENTRY') {
+                    return res.status(409).send('Já existe um colaborador com esse número.');
+                }
+                return res.status(500).send('Erro ao gravar os dados do colaborador.');
+            }
+            // Ajusta o redirecionamento ao fluxo real da aplicação
+            res.redirect('/menu?ok=1');
+        }
+    );
+});
+
+
 function isLoggedIn(req, res, next){
 	if(req.isAuthenticated()){
 		return next();
